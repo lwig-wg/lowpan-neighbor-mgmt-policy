@@ -127,49 +127,69 @@
     <keyword>LWIG, 6lo, RPL, PANA, PRE, PAC, PAA, NCE, neighbor cache management</keyword>
 
     <abstract>
-      <t>This document describes the problems associated with neighbor cache
-      management in constrained multihop networks and a sample neighbor
-      management policy to deal with it.</t>
+      <t>
+        <!--
+          This document describes the problems associated with neighbor cache
+          management in constrained multihop networks and a sample neighbor
+          management policy to deal with it.
+          -->
+          This document describes the problems associated with neighbor cache
+          management in multihop networks involving resource-constrained
+          devices.  Thereafter, it also presents a sample neighbor management
+          policy that allows efficient cache management in multihop LLNs
+          (low-power and lossy networks such as LoWPAN) with
+          resource-constrained devices.
+      </t>
     </abstract>
   </front>
 
 <middle>
 	<section title="Introduction">
-		<t> In a wireless multihop network, the node densities (maximum number of
-		devices connected on a single hop) may vary significantly depending
-		upon deployments/scenarios. While there is some policy control possible
-		with regards to the network size in terms of maximum number of devices
-		connected, it is especially difficult to set a figure on what will be
-		the maximum node density given a deployment.  For e.g. A network can
-		put an upper limit on max 1000 devices but it is impossible to state
-		what the node density will be in this 1000 node network. </t>
+		<t>
+            In a wireless multihop LLN, the node densities (maximum nodes
+            reachable on the same hop) may vary significantly depending upon
+            deployments and scenarios. Examples of such networks is LoWPAN
+            [REF] networks. While there is some policy control possible with
+            regards to the network size in terms of maximum number of devices
+            connected, it is especially difficult to set a figure on what will
+            be the maximum node density given a deployment.  For e.g. A network
+            can put an upper limit on max 1000 devices but it is impossible to
+            state what the node density will be in this 1000 node network.
+        </t>
 
-        <t>A neighbor cache is used for populating neighboring one-hop
-        connected nodes information such as MAC address, link local IP address
-        and other reachability state information. Node density has direct
-        implications on the neighbor cache and in constrained network scenario
-        the size of the neighbor cache will be limited. Thus there are chances
-        that a node may not be able to fit all the neighboring nodes in its
-        cache in which case it has to prioritize entries and thus needs a
-        neighbor management policy.</t>
+        <t>
+            A neighbor cache is used for populating neighboring one-hop
+            connected nodes information such as MAC address, link local IP
+            address and other reachability state information. Node density has
+            direct implications on the neighbor cache and in constrained
+            network scenario the size of the neighbor cache will be limited.
+            Thus there are chances that a node may not be able to fit all the
+            neighboring nodes in its cache in which case it has to prioritize
+            entries and thus needs a neighbor management policy.
+        </t>
 
-        <t>This draft presents problems related to neighbor management policies
-        by considering a security-enabled multi-hop 6lo network. This document
-        considers RPL <xref target="RFC6550"/> as a routing protocol and PANA
-        (EAP-PANA) <xref target="RFC5191"/> as a network access protocol. For
-        RPL, both the storing and non-storing mode of operations are
-        considered. We also provide a sample neighbor management policy which
-        can be used in such networks and its limitations. The aim of such a
-        policy is to retain set of neighbor cache entries with high quality
-        links such that routing adjacencies are stablized.</t>
+        <t>
+            This draft presents problems related to neighbor management
+            policies by considering a security-enabled multi-hop 6lo network.
+            This document considers RPL <xref target="RFC6550"/> as a routing
+            protocol and PANA (EAP-PANA) <xref target="RFC5191"/> as a network
+            access protocol. For RPL, both the storing and non-storing mode of
+            operations are considered. We also provide a sample neighbor
+            management policy which can be used in such networks and its
+            limitations. The aim of such a policy is to retain set of neighbor
+            cache entries with high quality links such that routing adjacencies
+            are stablized.
+        </t>
 
-		<t>The problem statement and the proposed solution described is also
-		relevant to other multihop constrained scenarios such as 6TiSCH <xref
-		target="I-D.ietf-6tisch-architecture"/>. <xref
-		target="I-D.ietf-6tisch-minimal-security"/> talks about a pledge (new
-		joinee) node authenticating via a Join Proxy. The considerations
-		mentioned in this document are applicable for such networks as
-		well.</t>
+		<t>
+            The problem statement and the proposed solution described is also
+            relevant to other multihop constrained scenarios such as 6TiSCH
+            <xref target="I-D.ietf-6tisch-architecture"/>. <xref
+            target="I-D.ietf-6tisch-minimal-security"/> talks about a pledge
+            (new joinee) node authenticating via a Join Proxy. The
+            considerations mentioned in this document are applicable for such
+            networks as well.
+        </t>
 
 		<t> <figure align="center" anchor="sample_top" title="Sample Topology">
 		<artwork align="center"><![CDATA[
@@ -208,24 +228,47 @@
 			in this document are to be interpreted as described in <xref
 			target="RFC2119">RFC 2119</xref>.</t>
 
-			<t>PaC (PANA Client): New joining node which is yet to be
-			authenticated.</t>
+            <t> NDP: Neighbor Discovery protocol [REF] </t>
 
-			<t>PRE (PANA Relay Element): An already authenticated and network
-			joined node which is willing to act as a relay element for PaCs to
-			complete their authentication procedure on multi-hop networks.
-			<xref target="RFC6345"/> describes the details of PRE.</t>
+            <t> NS: Neighbor Solicitation </t>
 
-			<t>PAA (PANA Auth Agent): Auth server which hosts the credentials
-			database. PaC will handshake with PAA to complete authentication
-			procedure.</t>
+            <t> NA: Neighbor Advertisement </t>
 
-			<t>Routing Child: A downstream node who is part of the routing
-			table of the parent. For e.g. in the sample topology above N5 is
-			the directly connected routing child for N3.  N6 and N7 are also
-			part of N3 routing table, they are routing child nodes but not
-			directly connected. For N6 and N7 the document might alternatively
-			use a term grand-child.</t>
+            <t> LLN: Low Power and Lossy Networks </t>
+
+            <t> RPL: Routing Protocol for LLNs [REF] </t>
+
+            <t> DAO: DODAG Advertisement Object </t>
+
+            <t> DIO: DODAG Information Object </t>
+
+			<t>
+                PaC (PANA Client): New joining node which is yet to be
+                authenticated.
+            </t>
+
+			<t>
+                PRE (PANA Relay Element): An already authenticated and network
+                joined node which is willing to act as a relay element for PaCs
+                to complete their authentication procedure on multi-hop
+                networks. <xref target="RFC6345"/> describes the details of
+                PRE.
+            </t>
+
+			<t>
+                PAA (PANA Auth Agent): Auth server which hosts the credentials
+                database. PaC will handshake with PAA to complete
+                authentication procedure.
+            </t>
+
+			<t>
+                Routing Child: A downstream node who is part of the routing
+                table of the parent. For e.g. in the sample topology above N5
+                is the directly connected routing child for N3.  N6 and N7 are
+                also part of N3 routing table, they are routing child nodes but
+                not directly connected. For N6 and N7 the document might
+                alternatively use a term grand-child.
+            </t>
 
             <t>Routing Parent: In <xref target="sample_top"/>, N1 and N2 are
             possible routing parents for N3.</t>
@@ -241,26 +284,31 @@
 
     <section anchor="nbr_mgmt" title="Neighbor Management">
         <section title="Significance of Neighbor management policy">
-			<t>Multihop mesh networks present unique challenges to neighbor
-			management especially with resource constrained nodes. In cases
-			where the node density is higher that the neighbor cache size, the
-			entries have to be prioritized. <xref target="Woo_et_al"/> and
-			<xref target="Dawans_et_al"/> talk about prioritization of neighbor
-			entries by using link quality estimation techniques. But
-			prioritization alone may not necessarily be optimal in all cases.
-			The reason or function why neighbor entry was added also needs to
-			be taken in consideration. For example, evicting a routing direct
-			child might have a ripple effect in turn impacting all the
-			sub-childs as well.</t>
+			<t>
+                Multihop mesh networks present unique challenges to neighbor
+                management especially with resource constrained nodes. In cases
+                where the node density is higher that the neighbor cache size,
+                the entries have to be prioritized. <xref target="Woo_et_al"/>
+                and <xref target="Dawans_et_al"/> talk about prioritization of
+                neighbor entries by using link quality estimation techniques.
+                But prioritization alone may not necessarily be optimal in all
+                cases.  The reason or function why neighbor entry was added
+                also needs to be taken in consideration. For example, evicting
+                a routing direct child might have a ripple effect in turn
+                impacting all the sub-childs as well.
+            </t>
 
-			<t>In case of key management protocols deployed above MAC layer in
-			multihop network, the neighbor management kicks in early even
-			before the routing adjacencies are established. Since a new joining
-			node needs to discover/attach to a relay element for completing its
-			authentication procedure, the neighbor cache entries
-			have to be appropriately populated both on a PaC and on the PRE. If
-			a neighbor entry whose authentication is in progress is evicted, it
-			will negatively impact the authentication procedure.</t>
+			<t>
+                In case of key management protocols deployed above MAC layer in
+                multihop network, the neighbor management kicks in early even
+                before the routing adjacencies are established. Since a new
+                joining node needs to discover/attach to a relay element for
+                completing its authentication procedure, the neighbor cache
+                entries have to be appropriately populated both on a PaC and on
+                the PRE. If a neighbor entry whose authentication is in
+                progress is evicted, it will negatively impact the
+                authentication procedure.
+            </t>
 
 			<t>Another important consideration is that with increased node
             density, the prioritization based on link estimation parameters
