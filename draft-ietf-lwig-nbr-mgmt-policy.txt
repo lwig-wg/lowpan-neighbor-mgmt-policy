@@ -18,8 +18,11 @@ Expires: January 30, 2019                                   S. Duquennoy
 Abstract
 
    This document describes the problems associated with neighbor cache
-   management in constrained multihop networks and a sample neighbor
-   management policy to deal with it.
+   management in multihop networks involving resource-constrained
+   devices.  Thereafter, it also presents a sample neighbor management
+   policy that allows efficient cache management in multihop LLNs (low-
+   power and lossy networks such as LoWPAN) with resource-constrained
+   devices.
 
 Status of This Memo
 
@@ -47,9 +50,6 @@ Copyright Notice
    Provisions Relating to IETF Documents
    (https://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
-   carefully, as they describe your rights and restrictions with respect
-   to this document.  Code Components extracted from this document must
-   include Simplified BSD License text as described in Section 4.e of
 
 
 
@@ -58,6 +58,9 @@ Jadhav, et al.          Expires January 30, 2019                [Page 1]
 Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
 
 
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
    the Trust Legal Provisions and are provided without warranty as
    described in the Simplified BSD License.
 
@@ -90,22 +93,19 @@ Table of Contents
 
 1.  Introduction
 
-   In a wireless multihop network, the node densities (maximum number of
-   devices connected on a single hop) may vary significantly depending
-   upon deployments/scenarios.  While there is some policy control
-   possible with regards to the network size in terms of maximum number
-   of devices connected, it is especially difficult to set a figure on
-   what will be the maximum node density given a deployment.  For e.g.
-   A network can put an upper limit on max 1000 devices but it is
-   impossible to state what the node density will be in this 1000 node
-   network.
+   In a wireless multihop LLN, the node densities (maximum nodes
+   reachable on the same hop) may vary significantly depending upon
+   deployments and scenarios.  Examples of such networks is LoWPAN [REF]
+   networks.  While there is some policy control possible with regards
+   to the network size in terms of maximum number of devices connected,
+   it is especially difficult to set a figure on what will be the
+   maximum node density given a deployment.  For e.g.  A network can put
+   an upper limit on max 1000 devices but it is impossible to state what
+   the node density will be in this 1000 node network.
 
    A neighbor cache is used for populating neighboring one-hop connected
    nodes information such as MAC address, link local IP address and
    other reachability state information.  Node density has direct
-   implications on the neighbor cache and in constrained network
-   scenario the size of the neighbor cache will be limited.  Thus there
-   are chances that a node may not be able to fit all the neighboring
 
 
 
@@ -114,6 +114,9 @@ Jadhav, et al.          Expires January 30, 2019                [Page 2]
 Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
 
 
+   implications on the neighbor cache and in constrained network
+   scenario the size of the neighbor cache will be limited.  Thus there
+   are chances that a node may not be able to fit all the neighboring
    nodes in its cache in which case it has to prioritize entries and
    thus needs a neighbor management policy.
 
@@ -133,9 +136,6 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
    talks about a pledge (new joinee) node authenticating via a Join
    Proxy.  The considerations mentioned in this document are applicable
    for such networks as well.
-
-
-
 
 
 
@@ -206,6 +206,28 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
    document are to be interpreted as described in RFC 2119 [RFC2119].
 
+   NDP: Neighbor Discovery protocol [REF]
+
+   NS: Neighbor Solicitation
+
+   NA: Neighbor Advertisement
+
+   LLN: Low Power and Lossy Networks
+
+   RPL: Routing Protocol for LLNs [REF]
+
+   DAO: DODAG Advertisement Object
+
+
+
+
+Jadhav, et al.          Expires January 30, 2019                [Page 4]
+
+Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
+
+
+   DIO: DODAG Information Object
+
    PaC (PANA Client): New joining node which is yet to be authenticated.
 
    PRE (PANA Relay Element): An already authenticated and network joined
@@ -216,15 +238,6 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
    PAA (PANA Auth Agent): Auth server which hosts the credentials
    database.  PaC will handshake with PAA to complete authentication
    procedure.
-
-
-
-
-
-Jadhav, et al.          Expires January 30, 2019                [Page 4]
-
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
-
 
    Routing Child: A downstream node who is part of the routing table of
    the parent.  For e.g. in the sample topology above N5 is the directly
@@ -261,6 +274,14 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
    multihop network, the neighbor management kicks in early even before
    the routing adjacencies are established.  Since a new joining node
    needs to discover/attach to a relay element for completing its
+
+
+
+Jadhav, et al.          Expires January 30, 2019                [Page 5]
+
+Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
+
+
    authentication procedure, the neighbor cache entries have to be
    appropriately populated both on a PaC and on the PRE.  If a neighbor
    entry whose authentication is in progress is evicted, it will
@@ -271,16 +292,6 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
    since there might be more well connected peers.  In dense deployments
    the number of directly attached neighbors with good quality links
    might still be higher than the max entries in neighbor cache size.
-
-
-
-
-
-
-Jadhav, et al.          Expires January 30, 2019                [Page 5]
-
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
-
 
 2.2.  Trivial neighbor management policies
 
@@ -319,17 +330,6 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
    entries because once the cache gets full and there is a request for
    new entry, it would result in evicting the least recently used (but
    active) entry.  If at later point of time, there is a traffic for the
-   evicted entry then the old entry has to be reinstated using IPv6 NDP
-   procedure.  This would mean reinstating the entry by evicting another
-   least recently used entry.  If the node density is very high, then
-   this churn would be substantially high to extent that it would
-   disrupt any routing adjacencies to be established in the network in a
-   stable way.
-
-
-
-
-
 
 
 
@@ -337,6 +337,13 @@ Jadhav, et al.          Expires January 30, 2019                [Page 6]
 
 Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
 
+
+   evicted entry then the old entry has to be reinstated using IPv6 NDP
+   procedure.  This would mean reinstating the entry by evicting another
+   least recently used entry.  If the node density is very high, then
+   this churn would be substantially high to extent that it would
+   disrupt any routing adjacencies to be established in the network in a
+   stable way.
 
 2.3.  Lifecycle of a NCE
 
@@ -364,13 +371,6 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
    relay element.  The joinee node will send an unsecured-NS to the
    relay element to solicit its NA.  The PRE may send a NA with the
    suitable status code as defined in section 6.5.3 of [RFC6775].
-
-
-
-
-
-
-
 
 
 
