@@ -3,7 +3,7 @@
      which is available here: http://xml.resource.org. -->
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!-- One method to get references from the online citation libraries.
-     There has to be one entity for each item to be referenced. 
+     There has to be one entity for each item to be referenced.
      An alternate method (rfc include) is described in the references. -->
 
 <!ENTITY RFC2119 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
@@ -14,7 +14,7 @@
 ]>
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
 <!-- used by XSLT processors -->
-<!-- For a complete list and description of processing instructions (PIs), 
+<!-- For a complete list and description of processing instructions (PIs),
      please see http://xml.resource.org/authoring/README.html. -->
 <!-- Below are generally applicable Processing Instructions (PIs) that most I-Ds might want to use.
      (Here they are set differently than their defaults in xml2rfc v1.32) -->
@@ -30,7 +30,7 @@
 <!-- use symbolic references tags, i.e, [RFC2119] instead of [1] -->
 <?rfc sortrefs="yes" ?>
 <!-- sort the reference entries alphabetically -->
-<!-- control vertical white space 
+<!-- control vertical white space
      (using these PIs as follows is recommended by the RFC Editor) -->
 <?rfc compact="yes" ?>
 <!-- do not start each main section on a new page -->
@@ -40,17 +40,17 @@
 <rfc category="info" docName="draft-ietf-lwig-nbr-mgmt-policy-latest" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3667, noModification3667, noDerivatives3667
-     you can add the attributes updates="NNNN" and obsoletes="NNNN" 
+     you can add the attributes updates="NNNN" and obsoletes="NNNN"
      they will automatically be output with "(if approved)" -->
 
   <!-- ***** FRONT MATTER ***** -->
 
   <front>
-    <!-- The abbreviated title is used in the page header - it is only necessary if the 
+    <!-- The abbreviated title is used in the page header - it is only necessary if the
          full title is longer than 39 characters -->
 
     <title abbrev="Neighbor Management Policy for 6LoWPAN">Neighbor Management Policy for 6LoWPAN</title>
-    
+
     <author fullname="Rahul Arvind Jadhav" initials="R.A." role="editor" surname="Jadhav">
       <organization>Huawei</organization>
       <address>
@@ -111,11 +111,11 @@
 
     <date year="2018" />
 
-    <!-- If the month and year are both specified and are the current ones, xml2rfc will fill 
-         in the current day for you. If only the current year is specified, xml2rfc will fill 
-	 in the current day and month for you. If the year is not the current one, it is 
-	 necessary to specify at least a month (xml2rfc assumes day="1" if not specified for the 
-	 purpose of calculating the expiry date).  With drafts it is normally sufficient to 
+    <!-- If the month and year are both specified and are the current ones, xml2rfc will fill
+         in the current day for you. If only the current year is specified, xml2rfc will fill
+	 in the current day and month for you. If the year is not the current one, it is
+	 necessary to specify at least a month (xml2rfc assumes day="1" if not specified for the
+	 purpose of calculating the expiry date).  With drafts it is normally sufficient to
 	 specify just the year. -->
 
     <!-- Meta-data Declarations -->
@@ -178,9 +178,9 @@
              +------| Auth   |
              |      | Server |
              |      +--------+
-+------------|-------------+ 
++------------|-------------+
 |            |             |
-|          (BR)            | 
+|          (BR)            |
 |          / \             |
 |         /   \            |
 |        /     \           |
@@ -199,7 +199,7 @@
 |  (N6)   (N7)             |
 |                          |
 |        6Lo Network       |
-+--------------------------+ 
++--------------------------+
             ]]></artwork> </figure> </t>
 
         <section title="Requirements Language and Terminology">
@@ -209,7 +209,7 @@
 			target="RFC2119">RFC 2119</xref>.</t>
 
 			<t>PaC (PANA Client): New joining node which is yet to be
-			authenticated.</t> 
+			authenticated.</t>
 
 			<t>PRE (PANA Relay Element): An already authenticated and network
 			joined node which is willing to act as a relay element for PaCs to
@@ -236,7 +236,7 @@
 			<t>This document also uses terminology described in <xref
 			target="RFC6550"/> and <xref target="RFC6775"/>.</t>
         </section>
-      
+
     </section>
 
     <section anchor="nbr_mgmt" title="Neighbor Management">
@@ -267,23 +267,23 @@
             might not help since there might be more well connected
             peers. In dense deployments the number of directly attached
             neighbors with good quality links might still be higher than the
-            max entries in neighbor cache size.</t> 
-		</section> 
-		<section title="Trivial neighbor management policies"> 
+            max entries in neighbor cache size.</t>
+		</section>
+		<section title="Trivial neighbor management policies">
 			<t>This section investigates policies which are used by most of the
 			current operating systems for constrained nodes. While such
 			policies are trivial to implement they may not be able to deal with
             the constrained network scenario. Note that such policies can still
             be used if it is known apriori that the neighbor cache can hold
-            entries for maximum node density.</t> 
+            entries for maximum node density.</t>
 
-			<t><list style="letters"> 
+			<t><list style="letters">
 			<t>First Come First Serve (FCFS) policy</t>
-			<t>Least Recently Used (LRU) policy</t> </list> 
+			<t>Least Recently Used (LRU) policy</t> </list>
 			The primary distinction between these policies is how it treats a
 			new entry when the neighbor cache is full. In case of FCFS policy,
             the new entry is simply rejected while with LRU, the new entry
-            replaces the least recently used entry.</t> 
+            replaces the least recently used entry.</t>
 
 			<t>RPL works by initiating a downstream multicast DIO to establish
 			upstream network path. Subsequently DAO messages might be sent by
@@ -294,7 +294,7 @@
 			receives a DAO message from all these child nodes. Note that once a
 			node establishes a parent entry or a routing entry on behalf of a
 			directly connected node then it has to also provision a neighbor
-			cache entry for it for subsequent unicast traffic.  </t> 
+			cache entry for it for subsequent unicast traffic.  </t>
 
 			<t> In case of FCFS policy, a node might end up hosting all the
 			neighbor entries based on DIO or DAO messages.  Once the cache is
@@ -310,12 +310,12 @@
 			entry. If the node density is very high, then this churn would
 			be substantially high to extent that it would disrupt any
 			routing adjacencies to be established in the network in a
-			stable way. </t> 
-		</section> 
+			stable way. </t>
+		</section>
 
-		<section title="Lifecycle of a NCE"> 
-			<section title="NCE Insertion"> 
-				<t> 
+		<section title="Lifecycle of a NCE">
+			<section title="NCE Insertion">
+				<t>
 				IPv6 NDP <xref target="RFC6775"/> defines signaling involved in
 				resolving the IPv6 addresses to its corresponding MAC addresses
                 which gets populated in the neighbor cache. In case of
@@ -484,7 +484,7 @@ addNCE(parent,reason=PARENT)       |            |
 				node decides to switch its preferred parent, the RPL
 				specifications allows the node to send a no-path DAO message to
 				invalidate the route along the previous path(s). A directly
-				connected parent node can use this message to clear the NCE. 
+				connected parent node can use this message to clear the NCE.
 
 				While the entry can be immediately cleared, usually the
 				implementations choose to wait a small amount of time before
@@ -499,7 +499,7 @@ addNCE(parent,reason=PARENT)       |            |
                 still contain the NCE on behalf of the child node. This
                 document recommends use of <xref target="RFC6775"/> section
                 6.5.3. which allows sending a zero lifetime ARO option in NS
-                for deregistering the corresponding neighbor entry.</t> 
+                for deregistering the corresponding neighbor entry.</t>
 
 				<t> <xref target="RFC6775"/>, ND optimizations for 6LoWPANs,
 				section 5.5.3. talks about deleting the entries in case the NUD
@@ -563,7 +563,7 @@ addNCE(parent,reason=PARENT)       |            |
 				for deciding about a link quality over a period of time.
 				Reinforcement can be achieved using one or more of the
 				following techniques:
-                <list style="hanging"> 
+                <list style="hanging">
 					<t hangText="Passive Monitoring:">Reinforcing the quality
 					parameters using packets received from the source. Trickled
 					DIO, periodic beacons, application traffic etc can be used
@@ -578,7 +578,7 @@ addNCE(parent,reason=PARENT)       |            |
 					adds a control overhead on the link, periodic probing can
 					help to ascertain connectivity in the absence of any other
 					traffic from the neighboring node.</t>
-                </list> 
+                </list>
                 </t>
                 <!-- SD: To what extent do we want to define probing? Do we only recommend, with one practical example? Or do we want to mandate? -->
 				<!-- RJ: Mandating i guess is not an option because there are so many probing options. We ll leave it at this and see if we recv any specific comment on this part -->
@@ -586,7 +586,7 @@ addNCE(parent,reason=PARENT)       |            |
         </section>
 
         <section title="Requirements of a good neighbor management policy">
-            <t> 
+            <t>
                 <list style="hanging">
                     <t hangText="Route Stability:">
                         Stable NCEs will result in stable routing adjacencies.
@@ -600,12 +600,12 @@ addNCE(parent,reason=PARENT)       |            |
                         NCE). It is required that such overhead be kept as low
                         as possible.
                     </t>
-                    
+
                     <t hangText="Scalability:">
                         Scalability with respect to large and uneven node
                         densities in the network.
                     </t>
-                </list> 
+                </list>
             </t>
         </section>
 
@@ -646,7 +646,7 @@ addNCE(parent,reason=PARENT)       |            |
 					address. NS helps to determine whether the PRE can allocate
 					an NCE for the PaC. PRE accordingly sends a NA response
 					with appropriate status field.</t>
-                </list> </t>                
+                </list> </t>
             </section>
 
             <section anchor="proactive" title="Proactive Approach">
@@ -803,7 +803,7 @@ but that is a different story :p)	-->
     </section>
 
     <section anchor="Security" title="Security Considerations">
-        <t> 
+        <t>
             The Join Relay or the PANA Relay Element allows the
             un-authenticated nodes to join the network. Since the NS/NA
             signaling is unencrypted, it is possible that a malicious node may
@@ -811,7 +811,7 @@ but that is a different story :p)	-->
             of reservation based policy for managing such entries. Following
             points try to reduce the impact of such attacks: Only a subset of
             entries are reserved for un-authenticated nodes.
-            <list style="letters"> 
+            <list style="letters">
                 <t>
                     Only a subset of entries are reserved for
                     un-authenticated nodes doing plain-text NS/NA
@@ -823,8 +823,8 @@ but that is a different story :p)	-->
                     are only needed during the time the authentication is in
                     progress. Thus a short-duration NCE timeout will help
                     reduce the impact of DoS attacks.
-                </t> 
-            </list> 
+                </t>
+            </list>
         </t>
     </section>
   </middle>
@@ -836,7 +836,7 @@ but that is a different story :p)	-->
         &RFC2119;
 		&RFC6775;
 		&RFC6550;
-        
+
     </references>
 
     <references title="Informative References">
