@@ -2,9 +2,9 @@
 
 This is the working area for the IETF [LWIG Working Group](https://datatracker.ietf.org/wg/lwig/documents/) Internet-Draft, "Neighbor Management Policy for 6LoWPAN".
 
-* [Editor's Copy](https://lwig-wg.github.io/lowpan-neighbor-mgmt-policy/#go.draft-ietf-lwig-nbr-mgmt-policy-latest.html)
-* [Working Group Draft](https://tools.ietf.org/html/draft-ietf-lwig-nbr-mgmt-policy-latest)
-* [Compare Editor's Copy to Working Group Draft](https://lwig-wg.github.io/lowpan-neighbor-mgmt-policy/#go.draft-ietf-lwig-nbr-mgmt-policy-latest.diff)
+* [Editor's Copy](https://lwig-wg.github.io/lowpan-neighbor-mgmt-policy/#go.draft-ietf-lwig-nbr-mgmt-policy.html)
+* [Working Group Draft](https://tools.ietf.org/html/draft-ietf-lwig-nbr-mgmt-policy)
+* [Compare Editor's Copy to Working Group Draft](https://lwig-wg.github.io/lowpan-neighbor-mgmt-policy/#go.draft-ietf-lwig-nbr-mgmt-policy.diff)
 
 ## Building the Draft
 
