@@ -378,7 +378,7 @@
                 in other cases as well. Section 10.3.2 of <xref
                 target="RFC6775"/> describes update and addition of such
                 NCEs based on roting information packets.</t>
-				
+
 				<t>Following are the possible signaling scenarios in which case
 				a neighbor entry may get added.</t>
 
