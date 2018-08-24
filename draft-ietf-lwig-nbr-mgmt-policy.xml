@@ -242,6 +242,8 @@
 
             <t> DIO: DODAG Information Object </t>
 
+            <t> ARO: Address Registration Option defined as part of IPv6 NDP</t>
+
 			<t>
                 PaC (PANA Client): New joining node which is yet to be
                 authenticated.
@@ -260,6 +262,9 @@
                 database. PaC will handshake with PAA to complete
                 authentication procedure.
             </t>
+
+            <t> PCI: PANA Client Initiation is the first message sent by the
+                PaC which initiates the authentication procedure </t>
 
 			<t>
                 Routing Child: A downstream node who is part of the routing
@@ -394,7 +399,7 @@
 				creation between PaC and PRE during relay discovery process">
                 <artwork align="center"><![CDATA[
                                  RPL
-       New           PRE         Parent        PAA
+       PaC           PRE         Parent        PAA
         |             |            |            |
         |  PRE Disc   |            |            |
         |<----------->|            |            |
@@ -413,7 +418,7 @@ addNCE(PRE,reason=PANA)            |            |
         |------------>|            |            |
         |             |            |            |
         |             |  AUTHPROC  |            |
-        |<----------->|<----------------------->|
+        |<===========>|<=======================>|
         |             |            |            |
                 ]]></artwork> </figure> </t>
 
@@ -458,7 +463,7 @@ addNCE(PRE,reason=PANA)            |            |
 				creation call Flow for RPL storing MOP"> <artwork
 				align="center"><![CDATA[
                                  RPL
-       New           PRE         Parent        PAA
+       PaC           PRE         Parent        PAA
         |             |            |            |
         |             |  AuthProc  |            |
         |<----------->|<----------------------->|
@@ -492,7 +497,7 @@ addNCE(parent,reason=PARENT)       |            |
 				creation call Flow for non-storing MOP"> <artwork
 				align="center"><![CDATA[
                                  RPL
-       New           PRE         Parent        Root
+       PaC           PRE         Parent        Root
         |             |            |            |
         |             |  AuthProc  |            |
         |<----------->|<----------------------->|
@@ -760,10 +765,22 @@ addNCE(parent,reason=PARENT)       |            |
             <!-- <postamble>Data from http://www.ietf.org/meetings/past.meetings.html</postamble> -->
         </texttable>
 
+        <t>
+            <xref target="tab_nce"/> denotes that the NCEs are reserved
+            dependending upon the reason for its addition.
+            MAX_ROUTING_PARENT_NCE_NUM specifies maximum number of parent
+            entries a node should allow.  MAX_ROUTING_CHILD_NCE_NUM specifies
+            maximum number of child entries that are allowed after which the
+            node SHOULD decline the DAO signalling. MAX_OTHER_NCE_NUM specifies
+            any other entries that might be created. Pre-auth session entries
+            are usually short-lived and should be considered part of this
+            category.
+        </t>
+
 		<t> Note that reservation policy depends upon identification of the
 		reason behind making an NCE . In case of pre-auth sessions, the
-		corresponding NCE is created based on the unsecured NS/NA.  In case of
-		storing MOP, CHILD_ENT NCEs are created either based on DAO (as shown
+		corresponding NCE is created based on unsecured NS/NA.  In case of
+		storing MOP, CHILD NCEs are created either based on DAO (as shown
 		in <xref target="s_callflow"/>) or based on secured NS/NA messaging (as
 		shown in <xref target="ns_callflow"/>).  In case of non-storing MOP, a
 		secured NS/NA messaging as shown in <xref target="ns_callflow"/> needs
@@ -783,12 +800,13 @@ but that is a different story :p)	-->
 <!-- RJ: The primary message i wanted to convey thru this artwork was that Routing parents can possibly occupy all entries if the corresponding space is not occupied by child/others -->
         </figure></t>
 
-		<t> As shown in the figure, the neighbor cache is partitioned into
-		different entry types. The routing parents can possibly occupy any
-		entry type if found vacant since in case an eviction is sought the
-		non-preferred routing parent could be evicted without much impact on
-		the functioning or on the control traffic. The eviction could be done
-		based on reasons specified in <xref target="nce_eviction"/>.</t>
+        <t> As shown in the <xref target="reserv_table" />, the neighbor
+        cache is partitioned into different entry types. The routing parents
+        can possibly occupy any entry type if found vacant since in case an
+        eviction is sought the non-preferred routing parent could be evicted
+        without much impact on the functioning or on the control traffic. The
+        eviction could be done based on reasons specified in <xref
+        target="nce_eviction"/>.</t>
 
 		<t> Routing Child entries are made in context to directly connected
 		peers and these entries are not deleted unless they are unreacable or
@@ -855,14 +873,13 @@ but that is a different story :p)	-->
             The Join Relay or the PANA Relay Element allows the
             un-authenticated nodes to join the network. Since the NS/NA
             signaling is unencrypted, it is possible that a malicious node may
-            try spoof and occupy all the entries. This draft explains the use
+            try to spoof and occupy all the entries. This draft explains the use
             of reservation based policy for managing such entries. Following
-            points try to reduce the impact of such attacks: Only a subset of
-            entries are reserved for un-authenticated nodes.
+            points try to reduce the impact of such attacks:
             <list style="letters">
                 <t>
                     Only a subset of entries are reserved for
-                    un-authenticated nodes doing plain-text NS/NA
+                    un-authenticated nodes doing plain-text NS/NA.
                 </t>
                 <t>
                     It is recommended that NCE timeout be configured a lower
