@@ -312,7 +312,7 @@ ul.toc li {
 
   <meta name="dct.creator" content="Jadhav, R., Ed., Sahoo, R., Duquennoy, S., and J. Eriksson" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-lwig-nbr-mgmt-policy-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2018-29" />
+  <meta name="dct.issued" scheme="ISO8601" content="2018-27" />
   <meta name="dct.abstract" content="This document describes the problems associated with neighbor cache management in multihop networks involving resource-constrained devices.  Thereafter, it also presents a sample neighbor management policy that allows efficient cache management in multihop LLNs (low-power and lossy networks such as LoWPAN) with resource-constrained devices.  " />
   <meta name="description" content="This document describes the problems associated with neighbor cache management in multihop networks involving resource-constrained devices.  Thereafter, it also presents a sample neighbor management policy that allows efficient cache management in multihop LLNs (low-power and lossy networks such as LoWPAN) with resource-constrained devices.  " />
 
@@ -336,7 +336,7 @@ ul.toc li {
 <td class="right">Huawei</td>
 </tr>
 <tr>
-<td class="left">Expires: January 30, 2019</td>
+<td class="left">Expires: February 28, 2019</td>
 <td class="right">S. Duquennoy</td>
 </tr>
 <tr>
@@ -353,7 +353,7 @@ ul.toc li {
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">July 29, 2018</td>
+<td class="right">August 27, 2018</td>
 </tr>
 
     	
@@ -369,7 +369,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on January 30, 2019.</p>
+<p>This Internet-Draft will expire on February 28, 2019.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2018 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -480,13 +480,15 @@ ul.toc li {
 <p id="rfc.section.1.1.p.6">RPL: Routing Protocol for LLNs [REF] </p>
 <p id="rfc.section.1.1.p.7">DAO: DODAG Advertisement Object </p>
 <p id="rfc.section.1.1.p.8">DIO: DODAG Information Object </p>
-<p id="rfc.section.1.1.p.9">PaC (PANA Client): New joining node which is yet to be authenticated.  </p>
-<p id="rfc.section.1.1.p.10">PRE (PANA Relay Element): An already authenticated and network joined node which is willing to act as a relay element for PaCs to complete their authentication procedure on multi-hop networks. <a href="#RFC6345" class="xref">[RFC6345]</a> describes the details of PRE.  </p>
-<p id="rfc.section.1.1.p.11">PAA (PANA Auth Agent): Auth server which hosts the credentials database. PaC will handshake with PAA to complete authentication procedure.  </p>
-<p id="rfc.section.1.1.p.12">Routing Child: A downstream node who is part of the routing table of the parent. For e.g. in the sample topology above N5 is the directly connected routing child for N3.  N6 and N7 are also part of N3 routing table, they are routing child nodes but not directly connected. For N6 and N7 the document might alternatively use a term grand-child.  </p>
-<p id="rfc.section.1.1.p.13">Routing Parent: In <a href="#sample_top" class="xref">Figure 1</a>, N1 and N2 are possible routing parents for N3.</p>
-<p id="rfc.section.1.1.p.14">Neighbor Cache Entry (NCE): A neighbor entry managed on behalf of directly connected peer.</p>
-<p id="rfc.section.1.1.p.15">This document also uses terminology described in <a href="#RFC6550" class="xref">[RFC6550]</a> and <a href="#RFC6775" class="xref">[RFC6775]</a>.</p>
+<p id="rfc.section.1.1.p.9">ARO: Address Registration Option defined as part of IPv6 NDP</p>
+<p id="rfc.section.1.1.p.10">PaC (PANA Client): New joining node which is yet to be authenticated.  </p>
+<p id="rfc.section.1.1.p.11">PRE (PANA Relay Element): An already authenticated and network joined node which is willing to act as a relay element for PaCs to complete their authentication procedure on multi-hop networks. <a href="#RFC6345" class="xref">[RFC6345]</a> describes the details of PRE.  </p>
+<p id="rfc.section.1.1.p.12">PAA (PANA Auth Agent): Auth server which hosts the credentials database. PaC will handshake with PAA to complete authentication procedure.  </p>
+<p id="rfc.section.1.1.p.13">PCI: PANA Client Initiation is the first message sent by the PaC which initiates the authentication procedure </p>
+<p id="rfc.section.1.1.p.14">Routing Child: A downstream node who is part of the routing table of the parent. For e.g. in the sample topology above N5 is the directly connected routing child for N3.  N6 and N7 are also part of N3 routing table, they are routing child nodes but not directly connected. For N6 and N7 the document might alternatively use a term grand-child.  </p>
+<p id="rfc.section.1.1.p.15">Routing Parent: In <a href="#sample_top" class="xref">Figure 1</a>, N1 and N2 are possible routing parents for N3.</p>
+<p id="rfc.section.1.1.p.16">Neighbor Cache Entry (NCE): A neighbor entry managed on behalf of directly connected peer.</p>
+<p id="rfc.section.1.1.p.17">This document also uses terminology described in <a href="#RFC6550" class="xref">[RFC6550]</a> and <a href="#RFC6775" class="xref">[RFC6775]</a>.</p>
 <h1 id="rfc.section.2">
 <a href="#rfc.section.2">2.</a> <a href="#nbr_mgmt" id="nbr_mgmt">Neighbor Management</a>
 </h1>
@@ -520,7 +522,7 @@ ul.toc li {
 <div id="auth_callflow"></div>
 <pre>
                                  RPL
-       New           PRE         Parent        PAA
+       PaC           PRE         Parent        PAA
         |             |            |            |
         |  PRE Disc   |            |            |
         |&lt;-----------&gt;|            |            |
@@ -539,7 +541,7 @@ addNCE(PRE,reason=PANA)            |            |
         |------------&gt;|            |            |
         |             |            |            |
         |             |  AUTHPROC  |            |
-        |&lt;-----------&gt;|&lt;-----------------------&gt;|
+        |&lt;===========&gt;|&lt;=======================&gt;|
         |             |            |            |
                 </pre>
 <p class="figure">Figure 2: NCE     creation between PaC and PRE during relay discovery process</p>
@@ -552,7 +554,7 @@ addNCE(PRE,reason=PANA)            |            |
 <div id="s_callflow"></div>
 <pre>
                                  RPL
-       New           PRE         Parent        PAA
+       PaC           PRE         Parent        PAA
         |             |            |            |
         |             |  AuthProc  |            |
         |&lt;-----------&gt;|&lt;-----------------------&gt;|
@@ -575,7 +577,7 @@ addNCE(parent,reason=PARENT)       |            |
 <div id="ns_callflow"></div>
 <pre>
                                  RPL
-       New           PRE         Parent        Root
+       PaC           PRE         Parent        Root
         |             |            |            |
         |             |  AuthProc  |            |
         |&lt;-----------&gt;|&lt;-----------------------&gt;|
@@ -705,7 +707,8 @@ addNCE(parent,reason=PARENT)       |            |
 </tr>
 </tbody>
 </table>
-<p id="rfc.section.3.p.2">Note that reservation policy depends upon identification of the reason behind making an NCE . In case of pre-auth sessions, the corresponding NCE is created based on the unsecured NS/NA.  In case of storing MOP, CHILD_ENT NCEs are created either based on DAO (as shown in <a href="#s_callflow" class="xref">Figure 3</a>) or based on secured NS/NA messaging (as shown in <a href="#ns_callflow" class="xref">Figure 4</a>).  In case of non-storing MOP, a secured NS/NA messaging as shown in <a href="#ns_callflow" class="xref">Figure 4</a> needs to be used.  </p>
+<p><a href="#tab_nce" class="xref">Table 1</a> denotes that the NCEs are reserved dependending upon the reason for its addition.  MAX_ROUTING_PARENT_NCE_NUM specifies maximum number of parent entries a node should allow.  MAX_ROUTING_CHILD_NCE_NUM specifies maximum number of child entries that are allowed after which the node SHOULD decline the DAO signalling. MAX_OTHER_NCE_NUM specifies any other entries that might be created. Pre-auth session entries are usually short-lived and should be considered part of this category.  </p>
+<p id="rfc.section.3.p.3">Note that reservation policy depends upon identification of the reason behind making an NCE . In case of pre-auth sessions, the corresponding NCE is created based on unsecured NS/NA.  In case of storing MOP, CHILD NCEs are created either based on DAO (as shown in <a href="#s_callflow" class="xref">Figure 3</a>) or based on secured NS/NA messaging (as shown in <a href="#ns_callflow" class="xref">Figure 4</a>).  In case of non-storing MOP, a secured NS/NA messaging as shown in <a href="#ns_callflow" class="xref">Figure 4</a> needs to be used.  </p>
 <div id="rfc.figure.5"></div>
 <div id="reserv_table"></div>
 <pre>
@@ -717,9 +720,9 @@ addNCE(parent,reason=PARENT)       |            |
             </pre>
 <p class="figure">Figure 5: Reservation of   NCEs in neighbor table</p>
 <p></p>
-<p id="rfc.section.3.p.4">As shown in the figure, the neighbor cache is partitioned into different entry types. The routing parents can possibly occupy any entry type if found vacant since in case an eviction is sought the non-preferred routing parent could be evicted without much impact on the functioning or on the control traffic. The eviction could be done based on reasons specified in <a href="#nce_eviction" class="xref">Section 2.3.3</a>.</p>
-<p id="rfc.section.3.p.5">Routing Child entries are made in context to directly connected peers and these entries are not deleted unless they are unreacable or there is any reason for the parent node to believe that it is no longer the preferred parent for the child node. Deletion may happen based on reasons mentioned in <a href="#nce_deletion" class="xref">Section 2.3.2</a>.</p>
-<p id="rfc.section.3.p.6">Other entries (OTHER) may be made in response to temporary requirement of making an NCE. One such case is the pre authentication phase where in the relay node makes an entry of the PaC temporarily till the time the authentication phase is completed. The NCE made thus is garbage collected at the end of the lifetime. Also an implementation may choose to keep a lower lifetime for such NCEs depending upon the time taken to complete the authentication process.  </p>
+<p id="rfc.section.3.p.5">As shown in the <a href="#reserv_table" class="xref">Figure 5</a>, the neighbor cache is partitioned into different entry types. The routing parents can possibly occupy any entry type if found vacant since in case an eviction is sought the non-preferred routing parent could be evicted without much impact on the functioning or on the control traffic. The eviction could be done based on reasons specified in <a href="#nce_eviction" class="xref">Section 2.3.3</a>.</p>
+<p id="rfc.section.3.p.6">Routing Child entries are made in context to directly connected peers and these entries are not deleted unless they are unreacable or there is any reason for the parent node to believe that it is no longer the preferred parent for the child node. Deletion may happen based on reasons mentioned in <a href="#nce_deletion" class="xref">Section 2.3.2</a>.</p>
+<p id="rfc.section.3.p.7">Other entries (OTHER) may be made in response to temporary requirement of making an NCE. One such case is the pre authentication phase where in the relay node makes an entry of the PaC temporarily till the time the authentication phase is completed. The NCE made thus is garbage collected at the end of the lifetime. Also an implementation may choose to keep a lower lifetime for such NCEs depending upon the time taken to complete the authentication process.  </p>
 <h1 id="rfc.section.3.1">
 <a href="#rfc.section.3.1">3.1.</a> Limitations of such a policy</h1>
 <p id="rfc.section.3.1.p.1">The reservation based policy mentioned in this section may result in sub-optimal path selection due to lack of NCE resource on the parent nodes. Also the restriction of maximum pre-auth sessions in the form of MAX_OTHER_NCE_NUM limits the maximum relay sessions that can be supported on the relay node.  </p>
@@ -736,10 +739,10 @@ addNCE(parent,reason=PARENT)       |            |
 <h1 id="rfc.section.6">
 <a href="#rfc.section.6">6.</a> <a href="#Security" id="Security">Security Considerations</a>
 </h1>
-<p id="rfc.section.6.p.1">The Join Relay or the PANA Relay Element allows the un-authenticated nodes to join the network. Since the NS/NA signaling is unencrypted, it is possible that a malicious node may try spoof and occupy all the entries. This draft explains the use of reservation based policy for managing such entries. Following points try to reduce the impact of such attacks: Only a subset of entries are reserved for un-authenticated nodes.  </p>
+<p id="rfc.section.6.p.1">The Join Relay or the PANA Relay Element allows the un-authenticated nodes to join the network. Since the NS/NA signaling is unencrypted, it is possible that a malicious node may try to spoof and occupy all the entries. This draft explains the use of reservation based policy for managing such entries. Following points try to reduce the impact of such attacks: </p>
 
 <ol style="list-style-type: lower-alpha">
-<li>Only a subset of entries are reserved for un-authenticated nodes doing plain-text NS/NA </li>
+<li>Only a subset of entries are reserved for un-authenticated nodes doing plain-text NS/NA.  </li>
 <li>It is recommended that NCE timeout be configured a lower value to evict such entries as soon as possible. New joining nodes are supposed to use these entries and thus are only needed during the time the authentication is in progress. Thus a short-duration NCE timeout will help reduce the impact of DoS attacks.  </li>
 </ol>
 

@@ -5,11 +5,11 @@
 LWIG                                                      R. Jadhav, Ed.
 Internet-Draft                                                  R. Sahoo
 Intended status: Informational                                    Huawei
-Expires: January 30, 2019                                   S. Duquennoy
+Expires: February 28, 2019                                  S. Duquennoy
                                                                    Inria
                                                              J. Eriksson
                                                           Yanzi Networks
-                                                           July 29, 2018
+                                                         August 27, 2018
 
 
                  Neighbor Management Policy for 6LoWPAN
@@ -39,7 +39,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on January 30, 2019.
+   This Internet-Draft will expire on February 28, 2019.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Jadhav, et al.          Expires January 30, 2019                [Page 1]
+Jadhav, et al.          Expires February 28, 2019               [Page 1]
 
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
+Internet-Draft   Neighbor Management Policy for 6LoWPAN      August 2018
 
 
    carefully, as they describe your rights and restrictions with respect
@@ -87,9 +87,9 @@ Table of Contents
    5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  16
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .  16
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  16
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  16
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  17
      7.2.  Informative References  . . . . . . . . . . . . . . . . .  17
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  17
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  18
 
 1.  Introduction
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Jadhav, et al.          Expires January 30, 2019                [Page 2]
+Jadhav, et al.          Expires February 28, 2019               [Page 2]
 
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
+Internet-Draft   Neighbor Management Policy for 6LoWPAN      August 2018
 
 
    implications on the neighbor cache and in constrained network
@@ -165,9 +165,9 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
 
 
 
-Jadhav, et al.          Expires January 30, 2019                [Page 3]
+Jadhav, et al.          Expires February 28, 2019               [Page 3]
 
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
+Internet-Draft   Neighbor Management Policy for 6LoWPAN      August 2018
 
 
                                           +--------+
@@ -221,12 +221,14 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
 
 
 
-Jadhav, et al.          Expires January 30, 2019                [Page 4]
+Jadhav, et al.          Expires February 28, 2019               [Page 4]
 
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
+Internet-Draft   Neighbor Management Policy for 6LoWPAN      August 2018
 
 
    DIO: DODAG Information Object
+
+   ARO: Address Registration Option defined as part of IPv6 NDP
 
    PaC (PANA Client): New joining node which is yet to be authenticated.
 
@@ -238,6 +240,9 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
    PAA (PANA Auth Agent): Auth server which hosts the credentials
    database.  PaC will handshake with PAA to complete authentication
    procedure.
+
+   PCI: PANA Client Initiation is the first message sent by the PaC
+   which initiates the authentication procedure
 
    Routing Child: A downstream node who is part of the routing table of
    the parent.  For e.g. in the sample topology above N5 is the directly
@@ -270,18 +275,17 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
    evicting a routing direct child might have a ripple effect in turn
    impacting all the sub-childs as well.
 
+
+
+Jadhav, et al.          Expires February 28, 2019               [Page 5]
+
+Internet-Draft   Neighbor Management Policy for 6LoWPAN      August 2018
+
+
    In case of key management protocols deployed above MAC layer in
    multihop network, the neighbor management kicks in early even before
    the routing adjacencies are established.  Since a new joining node
    needs to discover/attach to a relay element for completing its
-
-
-
-Jadhav, et al.          Expires January 30, 2019                [Page 5]
-
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
-
-
    authentication procedure, the neighbor cache entries have to be
    appropriately populated both on a PaC and on the PRE.  If a neighbor
    entry whose authentication is in progress is evicted, it will
@@ -326,18 +330,18 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
    entries based on DIO or DAO messages.  Once the cache is full all the
    subsequent attempts to add an NCE will fail.
 
+
+
+
+Jadhav, et al.          Expires February 28, 2019               [Page 6]
+
+Internet-Draft   Neighbor Management Policy for 6LoWPAN      August 2018
+
+
    In case of LRU policy, a node might end up churning lot of neighbor
    entries because once the cache gets full and there is a request for
    new entry, it would result in evicting the least recently used (but
    active) entry.  If at later point of time, there is a traffic for the
-
-
-
-Jadhav, et al.          Expires January 30, 2019                [Page 6]
-
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
-
-
    evicted entry then the old entry has to be reinstated using IPv6 NDP
    procedure.  This would mean reinstating the entry by evicting another
    least recently used entry.  If the node density is very high, then
@@ -385,17 +389,13 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
 
 
 
-
-
-
-
-Jadhav, et al.          Expires January 30, 2019                [Page 7]
+Jadhav, et al.          Expires February 28, 2019               [Page 7]
 
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
+Internet-Draft   Neighbor Management Policy for 6LoWPAN      August 2018
 
 
                                              RPL
-                   New           PRE         Parent        PAA
+                   PaC           PRE         Parent        PAA
                     |             |            |            |
                     |  PRE Disc   |            |            |
                     |<----------->|            |            |
@@ -414,7 +414,7 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
                     |------------>|            |            |
                     |             |            |            |
                     |             |  AUTHPROC  |            |
-                    |<----------->|<----------------------->|
+                    |<===========>|<=======================>|
                     |             |            |            |
 
      Figure 2: NCE creation between PaC and PRE during relay discovery
@@ -445,9 +445,9 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
 
 
 
-Jadhav, et al.          Expires January 30, 2019                [Page 8]
+Jadhav, et al.          Expires February 28, 2019               [Page 8]
 
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
+Internet-Draft   Neighbor Management Policy for 6LoWPAN      August 2018
 
 
    node.  For example, in the Figure 1, node N3 needs to maintain a
@@ -460,7 +460,7 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
    without any explicit NS/NA messaging.
 
                                              RPL
-                   New           PRE         Parent        PAA
+                   PaC           PRE         Parent        PAA
                     |             |            |            |
                     |             |  AuthProc  |            |
                     |<----------->|<----------------------->|
@@ -501,13 +501,13 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
 
 
 
-Jadhav, et al.          Expires January 30, 2019                [Page 9]
+Jadhav, et al.          Expires February 28, 2019               [Page 9]
 
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
+Internet-Draft   Neighbor Management Policy for 6LoWPAN      August 2018
 
 
                                            RPL
-                 New           PRE         Parent        Root
+                 PaC           PRE         Parent        Root
                   |             |            |            |
                   |             |  AuthProc  |            |
                   |<----------->|<----------------------->|
@@ -557,9 +557,9 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
 
 
 
-Jadhav, et al.          Expires January 30, 2019               [Page 10]
+Jadhav, et al.          Expires February 28, 2019              [Page 10]
 
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
+Internet-Draft   Neighbor Management Policy for 6LoWPAN      August 2018
 
 
    In case of non-storing mode, the no-path DAO cannot be not employed
@@ -613,9 +613,9 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
 
 
 
-Jadhav, et al.          Expires January 30, 2019               [Page 11]
+Jadhav, et al.          Expires February 28, 2019              [Page 11]
 
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
+Internet-Draft   Neighbor Management Policy for 6LoWPAN      August 2018
 
 
 2.3.4.  NCE Reinforcement
@@ -669,9 +669,9 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
 
 
 
-Jadhav, et al.          Expires January 30, 2019               [Page 12]
+Jadhav, et al.          Expires February 28, 2019              [Page 12]
 
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
+Internet-Draft   Neighbor Management Policy for 6LoWPAN      August 2018
 
 
 2.5.  Approaches to neighbor management policy
@@ -725,9 +725,9 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
 
 
 
-Jadhav, et al.          Expires January 30, 2019               [Page 13]
+Jadhav, et al.          Expires February 28, 2019              [Page 13]
 
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
+Internet-Draft   Neighbor Management Policy for 6LoWPAN      August 2018
 
 
    information and can be augmented with neighbor cache space as an
@@ -763,13 +763,31 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
 
                  Table 1: Neighbor Cache Entry reservation
 
+   Table 1 denotes that the NCEs are reserved dependending upon the
+   reason for its addition.  MAX_ROUTING_PARENT_NCE_NUM specifies
+   maximum number of parent entries a node should allow.
+   MAX_ROUTING_CHILD_NCE_NUM specifies maximum number of child entries
+   that are allowed after which the node SHOULD decline the DAO
+   signalling.  MAX_OTHER_NCE_NUM specifies any other entries that might
+   be created.  Pre-auth session entries are usually short-lived and
+   should be considered part of this category.
+
    Note that reservation policy depends upon identification of the
    reason behind making an NCE . In case of pre-auth sessions, the
-   corresponding NCE is created based on the unsecured NS/NA.  In case
-   of storing MOP, CHILD_ENT NCEs are created either based on DAO (as
-   shown in Figure 3) or based on secured NS/NA messaging (as shown in
-   Figure 4).  In case of non-storing MOP, a secured NS/NA messaging as
-   shown in Figure 4 needs to be used.
+   corresponding NCE is created based on unsecured NS/NA.  In case of
+   storing MOP, CHILD NCEs are created either based on DAO (as shown in
+   Figure 3) or based on secured NS/NA messaging (as shown in Figure 4).
+
+
+
+
+Jadhav, et al.          Expires February 28, 2019              [Page 14]
+
+Internet-Draft   Neighbor Management Policy for 6LoWPAN      August 2018
+
+
+   In case of non-storing MOP, a secured NS/NA messaging as shown in
+   Figure 4 needs to be used.
 
      <- - - - - - - - - - - Routing Parents - - - - - - - - - - - - ->
      +---------------------------------------------------------------+
@@ -779,14 +797,7 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
 
               Figure 5: Reservation of NCEs in neighbor table
 
-
-
-Jadhav, et al.          Expires January 30, 2019               [Page 14]
-
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
-
-
-   As shown in the figure, the neighbor cache is partitioned into
+   As shown in the Figure 5, the neighbor cache is partitioned into
    different entry types.  The routing parents can possibly occupy any
    entry type if found vacant since in case an eviction is sought the
    non-preferred routing parent could be evicted without much impact on
@@ -823,6 +834,14 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
    it previously.  One of the only way to stop the child node from
    reattempting such parent selection would be to also include a
    proactive approach wherein the parent node signals its resource
+
+
+
+Jadhav, et al.          Expires February 28, 2019              [Page 15]
+
+Internet-Draft   Neighbor Management Policy for 6LoWPAN      August 2018
+
+
    availability in the DIO message as mentioned in Section 2.5.2.  Such
    a scheme of signalling parent node's resource availability is
    currently not standardized.
@@ -834,14 +853,6 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
    the parent node.  Ideally the parent node could have evicted a least
    used child node or a child node who has an alternate parent
    available.  Evicting such a child node is a complex process and may
-
-
-
-Jadhav, et al.          Expires January 30, 2019               [Page 15]
-
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
-
-
    increase the control overhead as described in Section 2.3.3.1.  Thus
    the reservation based policy requires that the minimum node density
    is sufficiently high so that every child finds a parent node in its
@@ -860,14 +871,13 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
 
    The Join Relay or the PANA Relay Element allows the un-authenticated
    nodes to join the network.  Since the NS/NA signaling is unencrypted,
-   it is possible that a malicious node may try spoof and occupy all the
-   entries.  This draft explains the use of reservation based policy for
-   managing such entries.  Following points try to reduce the impact of
-   such attacks: Only a subset of entries are reserved for un-
-   authenticated nodes.
+   it is possible that a malicious node may try to spoof and occupy all
+   the entries.  This draft explains the use of reservation based policy
+   for managing such entries.  Following points try to reduce the impact
+   of such attacks:
 
    a.  Only a subset of entries are reserved for un-authenticated nodes
-       doing plain-text NS/NA
+       doing plain-text NS/NA.
 
    b.  It is recommended that NCE timeout be configured a lower value to
        evict such entries as soon as possible.  New joining nodes are
@@ -876,6 +886,17 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
        NCE timeout will help reduce the impact of DoS attacks.
 
 7.  References
+
+
+
+
+
+
+
+Jadhav, et al.          Expires February 28, 2019              [Page 16]
+
+Internet-Draft   Neighbor Management Policy for 6LoWPAN      August 2018
+
 
 7.1.  Normative References
 
@@ -890,13 +911,6 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
               Low-Power and Lossy Networks", RFC 6550,
               DOI 10.17487/RFC6550, March 2012,
               <https://www.rfc-editor.org/info/rfc6550>.
-
-
-
-Jadhav, et al.          Expires January 30, 2019               [Page 16]
-
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
-
 
    [RFC6775]  Shelby, Z., Ed., Chakrabarti, S., Nordmark, E., and C.
               Bormann, "Neighbor Discovery Optimization for IPv6 over
@@ -928,6 +942,18 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
               Network Access (PANA)", RFC 5191, DOI 10.17487/RFC5191,
               May 2008, <https://www.rfc-editor.org/info/rfc5191>.
 
+
+
+
+
+
+
+
+Jadhav, et al.          Expires February 28, 2019              [Page 17]
+
+Internet-Draft   Neighbor Management Policy for 6LoWPAN      August 2018
+
+
    [RFC6345]  Duffy, P., Chakrabarti, S., Cragie, R., Ohba, Y., Ed., and
               A. Yegin, "Protocol for Carrying Authentication for
               Network Access (PANA) Relay Element", RFC 6345,
@@ -940,19 +966,6 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
               Networks", 2003.
 
 Authors' Addresses
-
-
-
-
-
-
-
-
-
-Jadhav, et al.          Expires January 30, 2019               [Page 17]
-
-Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
-
 
    Rahul Arvind Jadhav (editor)
    Huawei
@@ -992,17 +1005,4 @@ Internet-Draft   Neighbor Management Policy for 6LoWPAN        July 2018
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-Jadhav, et al.          Expires January 30, 2019               [Page 18]
+Jadhav, et al.          Expires February 28, 2019              [Page 18]
